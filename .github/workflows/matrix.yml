@@ -11,18 +11,17 @@ on:
       x:
         description: manual input for x
         type: string
+      y:
+        description: manual input for y
+        type: string
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   my_job:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        x: ['1', '2', ${{ github.event.inputs.x }}]
-      fail-fast: false
-    # Steps represent a sequence of tasks that will be executed as part of the job
+        x: ['a', 'b', 'c']
+        y: ['1', '2', '3']
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - run: |
-          echo x is ${{matrix.x}}
+          echo "${{matrix.x}}${{matrix.y}}"
