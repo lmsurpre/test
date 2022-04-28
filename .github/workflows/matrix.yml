@@ -5,8 +5,19 @@ on:
   workflow_dispatch:
     inputs:
       x:
-        definition:
-        type: string
+        description: manual override for x
+        type: choice
+        options: 
+          - 'a'
+          - 'b'
+          - 'c'
+      y:
+        description: manual override for y
+        type: choice
+        options: 
+          - '1'
+          - '2'
+          - '3'
 
 jobs:
   setup:
@@ -23,7 +34,7 @@ jobs:
 
           y=${{github.event.inputs.y}}
           if [ -z ${y} ]; then
-            echo "::set-output name=y::["1","2","3"]"
+            echo "::set-output name=y::['1','2','3']"
           else
             echo "::set-output name=y::['${y}']"
           fi
