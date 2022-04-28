@@ -11,11 +11,11 @@ on:
       x:
         description: manual override for x
         type: choice
-        options: ${{fromJSON(env.X_VALS)}}
+        options: ${{fromJSON(${{env.X_VALS}})}}
       y:
         description: manual override for y
         type: choice
-        options: ${{fromJSON(env.Y_VALS)}}
+        options: ${{fromJSON(${{env.Y_VALS}})}}
 
 jobs:
   setup:
