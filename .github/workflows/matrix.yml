@@ -27,4 +27,4 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - run: |
-        echo x is ${{matrix.release}}
+          echo x is ${{matrix.release}}
