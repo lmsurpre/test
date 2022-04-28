@@ -40,7 +40,7 @@ jobs:
 
           y=${{github.event.inputs.y}}
           if [ -z ${y} ]; then
-            echo "::set-output name=y::${X_VALS}"
+            echo "::set-output name=y::${Y_VALS}"
           else
             echo "::set-output name=y::['${y}']"
           fi
