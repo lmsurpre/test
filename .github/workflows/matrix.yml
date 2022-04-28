@@ -15,14 +15,14 @@ jobs:
       - id: set-matrix
         run: |
           x=${{github.event.inputs.x}}
-          if [ -z ${x} ]
+          if [ -z ${x} ]; then
             echo "::set-output name=x::['${x}']"
           else
             echo "::set-output name=x::['a','b','c']"
           fi
 
           y=${{github.event.inputs.y}}
-          if [ -z ${y} ]
+          if [ -z ${y} ]; then
             echo "::set-output name=y::['${y}']"
           else
             echo "::set-output name=y::["1","2","3"]"
