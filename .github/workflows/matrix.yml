@@ -1,5 +1,9 @@
 name: matrix test
 
+env:
+  X_VALS: "['a','b','c']"
+  Y_VALS: "['1','2','3']"
+
 on:
   push:
   workflow_dispatch:
@@ -7,17 +11,11 @@ on:
       x:
         description: manual override for x
         type: choice
-        options: 
-          - 'a'
-          - 'b'
-          - 'c'
+        options: ${{fromJSON(env.X_VALS)}}
       y:
         description: manual override for y
         type: choice
-        options: 
-          - '1'
-          - '2'
-          - '3'
+        options: ${{fromJSON(env.Y_VALS)}}
 
 jobs:
   setup:
@@ -27,14 +25,14 @@ jobs:
         run: |
           x=${{github.event.inputs.x}}
           if [ -z ${x} ]; then
-            echo "::set-output name=x::['a','b','c']"
+            echo "::set-output name=x::${X_VALS}]"
           else
             echo "::set-output name=x::['${x}']"
           fi
 
           y=${{github.event.inputs.y}}
           if [ -z ${y} ]; then
-            echo "::set-output name=y::['1','2','3']"
+            echo "::set-output name=y::${Y_VALS}"
           else
             echo "::set-output name=y::['${y}']"
           fi
@@ -50,4 +48,3 @@ jobs:
         y: ${{fromJSON(needs.setup.outputs.y)}}
     steps:
       - run: echo ${{matrix.x}}${{matrix.y}}
-
