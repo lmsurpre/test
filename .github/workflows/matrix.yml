@@ -21,7 +21,7 @@ jobs:
       matrix:
         x: ['1', '2']
         include:
-          x: ${{ github.event.inputs.x }}
+          - x: ${{ github.event.inputs.x }}
       fail-fast: false
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
