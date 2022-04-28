@@ -2,6 +2,11 @@ name: matrix test
 
 on:
   push:
+  workflow_dispatch:
+    inputs:
+      x:
+        definition:
+        type: string
 
 jobs:
   my_job:
@@ -11,7 +16,8 @@ jobs:
         x: ['a', 'b', 'c']
         y: ['1', '2', '3']
         include:
-          - x: 'd'
+          - x: ${{ fromJson(github.event.inputs.x) }}
+            y: ${{ fromJson(github.event.inputs.y) }}
     steps:
       - run: |
           echo "${{matrix.x}}${{matrix.y}}"
