@@ -9,8 +9,9 @@ on:
   workflow_dispatch:
     inputs:
       x:
-        description: manual override for x ${{env.X_VALS}}
+        description: manual override for x
         type: choice
+        # manually keep the options in sync with X_VALS
         options: 
           - 'a'
           - 'b'
@@ -18,6 +19,7 @@ on:
       y:
         description: manual override for y
         type: choice
+        # manually keep the options in sync with Y_VALS
         options: 
           - '1'
           - '2'
