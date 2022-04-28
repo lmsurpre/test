@@ -32,12 +32,12 @@ jobs:
       - id: set-matrix
         run: |
           # set x to X_VALS if no input was provided
-          x=${${{ github.event.inputs.x }}:-"${X_VALS}""}
+          x=${${{ github.event.inputs.x }}:-"${X_VALS}"}
           echo "::set-output name=x::${x}]"
 
           # set y to Y_VALS if no input was provided
           y=${${{ github.event.inputs.x }}:-"${Y_VALS}"}
-          echo "::set-output name=y::${Y_VALS}"
+          echo "::set-output name=y::${y}"
     outputs:
       x: ${{ steps.set-matrix.outputs.x }}
       y: ${{ steps.set-matrix.outputs.y }}
