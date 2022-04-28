@@ -19,9 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        x: ['1', '2']
-        include:
-          - x: ${{ github.event.inputs.x }}
+        x: ['1', '2', ${{ github.event.inputs.x }}]
       fail-fast: false
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
