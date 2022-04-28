@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       X_IN: ${{ github.event.inputs.x }}
-      y_IN: ${{ github.event.inputs.y }}
+      Y_IN: ${{ github.event.inputs.y }}
     steps:
       - id: set-matrix
         run: |
