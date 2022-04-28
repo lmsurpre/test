@@ -1,8 +1,8 @@
 name: matrix test
 
 env:
-  X_VALS: (a b c)
-  Y_VALS: (1 2 3)
+  X_VALS: "['a','b','c']"
+  Y_VALS: "['1','2','3']"
 
 on:
   push:
@@ -30,17 +30,22 @@ jobs:
     runs-on: ubuntu-latest
     env:
       X_IN: ${{ github.event.inputs.x }}
-      Y_IN: ${{ github.event.inputs.y }}
+      y_IN: ${{ github.event.inputs.y }}
     steps:
       - id: set-matrix
         run: |
-          # set x to X_VALS if no input was provided
-          x=$(jq --compact-output --null-input '$ARGS.positional' --args "${X_IN:-${X_VALS[@]}}")
-          echo "::set-output name=x::${x}"
+          if [ -z ${X_IN} ]; then
+            echo "::set-output name=x::${X_VALS}]"
+          else
+            echo "::set-output name=x::['${X_IN}']"
+          fi
 
           # set y to Y_VALS if no input was provided
-          y=$(jq --compact-output --null-input '$ARGS.positional' --args "${Y_IN:-${Y_VALS[@]}}")
-          echo "::set-output name=y::${y}"
+          if [ -z ${Y_IN} ]; then
+            echo "::set-output name=y::${Y_VALS}"
+          else
+            echo "::set-output name=y::['${Y_IN}']"
+          fi
     outputs:
       x: ${{ steps.set-matrix.outputs.x }}
       y: ${{ steps.set-matrix.outputs.y }}
@@ -52,4 +57,4 @@ jobs:
         x: ${{ fromJSON(needs.setup.outputs.x) }}
         y: ${{ fromJSON(needs.setup.outputs.y) }}
     steps:
-      - run: echo ${{ matrix.x }}${{ matrix.y }}
+      - run: echo ${{matrix.x}}${{matrix.y}}
