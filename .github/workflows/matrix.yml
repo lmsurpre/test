@@ -31,19 +31,13 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          x=${{github.event.inputs.x}}
-          if [ -z ${x} ]; then
-            echo "::set-output name=x::${X_VALS}]"
-          else
-            echo "::set-output name=x::['${x}']"
-          fi
+          # set x to X_VALS if no input was provided
+          x=${${{ github.event.inputs.x }}:-${X_VALS}}
+          echo "::set-output name=x::${x}]"
 
-          y=${{github.event.inputs.y}}
-          if [ -z ${y} ]; then
-            echo "::set-output name=y::${Y_VALS}"
-          else
-            echo "::set-output name=y::['${y}']"
-          fi
+          # set y to Y_VALS if no input was provided
+          y=${${{ github.event.inputs.x }}:-${Y_VALS}}
+          echo "::set-output name=y::${Y_VALS}"
     outputs:
       x: ${{ steps.set-matrix.outputs.x }}
       y: ${{ steps.set-matrix.outputs.y }}
